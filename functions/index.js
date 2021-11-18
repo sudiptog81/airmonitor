@@ -1,4 +1,5 @@
 const axios = require("axios");
+const dedent = require("dedent");
 const functions = require("firebase-functions");
 const { conversation } = require("@assistant/conversation");
 
@@ -29,7 +30,7 @@ app.handle("fetch_aqi", async (conv) => {
     const aqi = data.data.aqi;
     const remarks = getRemarks(aqi);
     conv.add(
-      `The current air quality at ${city} is ${remarks},
+      dedent`The current air quality at ${city} is ${remarks},
        with an AQI of ${aqi}.`,
     );
   } catch (error) {
@@ -47,7 +48,7 @@ app.handle("fetch_aqi_with_station", async (conv) => {
       const aqi = data.data[0].aqi;
       const remarks = getRemarks(aqi);
       conv.add(
-        `The current air quality at ${station} is ${remarks},
+        dedent`The current air quality at ${station} is ${remarks},
          with an AQI of ${aqi}.`,
       );
     } else {
